@@ -10,7 +10,7 @@
     <% else -%>
       <%= submit_tag "Yes, send now" %> or
     <% end -%>
-    <%= link_to 'No, I will send it later', :controller => '/admin/page', :action => 'edit', :id => @page %>
+    <%= link_to 'No, I will send it later', :controller => '/admin/pages', :action => 'edit', :id => @page %>
   <% end %>
 </p> 
 <h2>Subject: "[<%= @newsletter.title %>] <%= @page.title %>"</h2>

@@ -51,13 +51,13 @@ class NewslettersControllerTest < Test::Unit::TestCase
     subscribers_count = pages(:newsletter).active_subscribers.count
     assert_difference NewsletterEmail, :count, subscribers_count * 2 do
       post :create, :page_id => pages(:first_email_for_newsletter).id
-      assert_redirected_to :controller => '/admin/page', :action => 'edit', :id => pages(:first_email_for_newsletter).id      
+      assert_redirected_to :controller => '/admin/pages', :action => 'edit', :id => pages(:first_email_for_newsletter).id      
       assert_equal subscribers_count, NewsletterEmail.count(:conditions => ["page_id = ?", pages(:first_email_for_newsletter).id])
       assert_equal pages(:first_email_for_newsletter), NewsletterEmail.find(:first).page
       assert_not_nil pages(:first_email_for_newsletter).reload.sent_as_newsletter_email_at
       
       post :create, :page_id => pages(:second_email_for_newsletter).id
-      assert_redirected_to :controller => '/admin/page', :action => 'edit', :id => pages(:second_email_for_newsletter).id
+      assert_redirected_to :controller => '/admin/pages', :action => 'edit', :id => pages(:second_email_for_newsletter).id
       assert_equal subscribers_count, NewsletterEmail.count(:conditions => ["page_id = ?", pages(:second_email_for_newsletter).id])
       assert_equal pages(:second_email_for_newsletter), NewsletterEmail.find(:all).last.page
       assert_not_nil pages(:second_email_for_newsletter).reload.sent_as_newsletter_email_at
@@ -75,7 +75,7 @@ class NewslettersControllerTest < Test::Unit::TestCase
   def test_should_send_test_email
     assert_difference NewsletterEmail, :count, 0 do
       post :create, :test_email => 1, :address => 'test@example.com', :page_id => pages(:first_email_for_newsletter).id
-      assert_redirected_to :controller => '/admin/page', :action => 'edit', :id => pages(:first_email_for_newsletter).id
+      assert_redirected_to :controller => '/admin/pages', :action => 'edit', :id => pages(:first_email_for_newsletter).id
       assert_equal 1, ActionMailer::Base.deliveries.size
       email = ActionMailer::Base.deliveries[0]
       assert_equal 1, email.header["to"].addrs.size
