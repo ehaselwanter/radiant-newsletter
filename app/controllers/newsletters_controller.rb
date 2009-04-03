@@ -19,7 +19,7 @@ class NewslettersController < ApplicationController
         send_emails(@newsletter, @page)
         flash[:notice] = "Email has been sent correctly"
       end      
-      redirect_to(:controller => '/admin/page', :action => 'edit', :id => @page)
+      redirect_to(:controller => '/admin/pages', :action => 'edit', :id => @page)
     else
       redirect_to(:action => "new", :page_id => @page.id)
     end
@@ -46,7 +46,7 @@ private
       NewsletterEmail.create({
         :page_id        => page.id,
         :mail           => email.encoded, 
-        :to             => subscriber.address,
+        :to             => subscriber.email,
         :from           => info[:from]
       })
     end
