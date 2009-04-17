@@ -13,16 +13,6 @@ More info can be found at the following url:
 
 == Installation
 
-	Newsletter extension requires the Shards extension, an official extension from the Radiant team:
-	
-		svn export http://dev.radiantcms.org/svn/radiant/trunk/extensions/shards/ ./vendor/extensions/shards
-  
-	Make sure that Shards is loaded before this and other extensions requiring it by
-	adding this line inside the Radiant::Initializer.run do |config| section of
-	environment.rb:
-
-		config.extensions = [ :shards, :all ]
-  
   Also you need to install the will_paginate rails plugin, you can find more info here:
     
     http://rock.errtheblog.com/will_paginate
@@ -35,7 +25,7 @@ More info can be found at the following url:
   
 Add ActionMailer configurations in your environment.rb and restart the server.
 
-	config.action_mailer.server_settings = {
+	config.action_mailer.smtp_settings = {
 	  :address => "address_of_smtp_server",
 	  :port => 25,
 	  :domain => "domain_of_smtp_server"
